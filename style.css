@@ -1,0 +1,149 @@
+/* Importamos la fuente Poppins directamente desde Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap');
+
+body {
+    background-color: #f0f2f5;
+    /* Un gris azulado muy clarito de fondo */
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* Centra todo en la pantalla */
+    min-height: 100vh;
+}
+
+
+
+header {
+    background-color: rgb(17, 0, 255);
+    color: white;
+    /* Letra blanca para que contraste bien */
+    width: 100%;
+    padding: 20px 0;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+header h1 {
+    margin: 0;
+    font-weight: 800;
+    letter-spacing: 2px;
+    text-align: left;
+}
+
+header div a {
+    text-decoration: none;
+    color: inherit;
+    padding: 0 15px;
+    font-weight: 600;
+}
+
+header div a:hover {
+    background-color: rgb(11, 0, 170);
+    padding: 10px 15px;
+    border-radius: 8px;
+}
+
+.colum {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+}
+
+main {
+    background-color: white;
+    margin-top: 40px;
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.1);
+    width: 90%;
+    max-width: 400px;
+    /* Para que no sea gigante en la pantalla del PC */
+}
+
+.grupo-input {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    margin-bottom: 25px;
+}
+
+.grupo-input label {
+    font-weight: 600;
+    margin-bottom: 8px;
+    color: #333;
+}
+
+.grupo-input input {
+    padding: 12px;
+    border: 2px solid #ccc;
+    border-radius: 8px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 16px;
+    transition: border-color 0.3s;
+}
+
+/* Efecto al hacer clic en escribir el nombre */
+.grupo-input input:focus {
+    border-color: rgb(17, 0, 255);
+    outline: none;
+}
+
+.grupo-radio {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-bottom: 30px;
+    text-align: left;
+
+}
+
+
+
+/* Estilo de "tarjeta" para las opciones de radio */
+.grupo-radio label {
+    background-color: rgb(238, 244, 247);
+    padding: 12px 15px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: 600;
+}
+
+.grupo-radio label:hover {
+    background-color: #d0e3ff;
+    transform: scale(1.05);
+}
+
+.grupo-radio label:active {
+    transform: scale(0.95);
+}
+
+button#sumar {
+    width: 100%;
+    padding: 15px;
+    background-color: rgb(17, 0, 255);
+    color: white;
+    font-size: 20px;
+    font-weight: 800;
+    border: none;
+    border-radius: 10px;
+    box-shadow: 0px 5px 15px rgba(17, 0, 255, 0.4);
+    cursor: pointer;
+    transition: transform 0.1s, background-color 0.3s;
+}
+
+button#sumar:hover {
+    transform: scale(1.05);
+
+}
+
+button#sumar:active {
+    transform: scale(0.95);
+    background-color: #0b00a8;
+}
