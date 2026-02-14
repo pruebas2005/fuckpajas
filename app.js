@@ -1,10 +1,9 @@
-
-// 1. PON AQUÍ TUS CLAVES DE SUPABASE
+// 1. TUS CLAVES DE SUPABASE
 const SUPABASE_URL = 'https://vkjcfhxxmtmlgynmtpby.supabase.co';
-const SUPABASE_KEY = 'sb_publishable_GfGmOiq3CazPywMtfh4xNA_R335BXeT';
+const SUPABASE_KEY = 'sb_publishable_GfGmOiq3CazPywMtfh4xNA_R335BXeT'; // Asegúrate de que pegaste la clave COMPLETA aquí.
 
-// 2. Inicializamos la conexión
-const supabase = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+// 2. Inicializamos la conexión (¡Le cambiamos el nombre a conexionBD para evitar el error!)
+const conexionBD = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
 // 3. Le decimos al botón qué hacer cuando alguien envíe el formulario
 document.getElementById('formulario-colegas').addEventListener('submit', async function (evento) {
@@ -20,9 +19,8 @@ document.getElementById('formulario-colegas').addEventListener('submit', async f
     const urlVideo = document.getElementById('url').value;
     const opcionElegida = document.querySelector('input[name="opcion"]:checked').value;
 
-    // Mandamos los datos a tu tabla 'registro_pajas'
-    // (Acuérdate de que 'momento' se pone solo con la hora del servidor)
-    const { data, error } = await supabase
+    // Mandamos los datos usando nuestra 'conexionBD'
+    const { data, error } = await conexionBD
         .from('registro_pajas')
         .insert([
             {
@@ -34,7 +32,7 @@ document.getElementById('formulario-colegas').addEventListener('submit', async f
 
     // Comprobamos si ha ido bien o mal
     if (error) {
-        console.error(error);
+        console.error("Error detallado:", error);
         alert("Pfff, ha habido un error al guardar: " + error.message);
     } else {
         alert("¡Anotado en el marcador! 💦");
