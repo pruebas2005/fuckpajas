@@ -35,7 +35,6 @@ document.getElementById('formulario-colegas').addEventListener('submit', async f
         console.error("Error detallado:", error);
         alert("Pfff, ha habido un error al guardar: " + error.message);
     } else {
-        alert("¡Anotado en el marcador! 💦");
         document.getElementById('formulario-colegas').reset(); // Limpiamos el formulario
     }
 
