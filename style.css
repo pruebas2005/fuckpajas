@@ -148,8 +148,61 @@ button#sumar:active {
     background-color: #0b00a8;
 }
 
+/* --- ADAPTACIÓN PARA MÓVILES --- */
 @media (max-width: 600px) {
+
+    /* Hacemos el encabezado más fino */
+    header {
+        padding: 10px 0;
+    }
+
     .colum {
-        font-size: 10px;
+        padding: 0 10px;
+    }
+
+    /* Título un poco más pequeño */
+    header h1 {
+        font-size: 22px;
+    }
+
+    /* Enlaces del menú más pequeños y con menos relleno */
+    header div a {
+        padding: 5px 8px;
+        font-size: 14px;
+    }
+
+    /* La caja principal con menos espacio muerto alrededor */
+    main {
+        margin-top: 20px;
+        padding: 15px;
+        width: 95%;
+        /* Que aproveche casi todo el ancho del móvil */
+    }
+
+    /* Achicamos textos de etiquetas y separaciones */
+    .grupo-input label {
+        font-size: 14px;
+        margin-bottom: 5px;
+    }
+
+    .grupo-input {
+        margin-bottom: 15px;
+    }
+
+    /* Inputs y opciones un pelín más pequeños */
+    .grupo-input input {
+        padding: 10px;
+        font-size: 14px;
+    }
+
+    .grupo-radio label {
+        padding: 10px;
+        font-size: 14px;
+    }
+
+    /* Botón más ajustado */
+    button#sumar {
+        padding: 12px;
+        font-size: 18px;
     }
 }
