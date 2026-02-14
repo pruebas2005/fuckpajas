@@ -23,17 +23,55 @@
 
     <main>
         <fieldset>
-            <legend>Total acumuladas</legend>
+            <legend>Total acumuladas </legend>
+            <div class="colum">
+
+                <div class="center">
+                    <label><input type="radio" name="opcion1" value="">Todas</label>
+                    <label><input type="radio" name="opcion1" value="deslechada">Deslechada</label>
+                    <label><input type="radio" name="opcion1" value="copulacion">Copulacion</label>
+                    <label><input type="radio" name="opcion1" value="no_contesta">Otra</label>
+                </div>
+                <div>
+                    <button id="actualizar">Actualizar</button>
+                </div>
+            </div>
+            <hr>
+            <div class="center" id="ranking-total">
+            </div>
         </fieldset>
 
         <fieldset>
             <legend>Mes</legend>
-            <input type="date">
+            <div class="colum">
+                <div>
+                    <label for="mes">
+                        Introduce el mes de busqueda de la deslechada:
+                        <input type="month" id="mes" name="mes">
+                    </label>
+                </div>
+
+                <div>
+                    <label><input type="radio" name="opcion2" value="">Todas</label>
+                    <label><input type="radio" name="opcion2" value="deslechada">Deslechada</label>
+                    <label><input type="radio" name="opcion2" value="copulacion">Copulacion</label>
+                    <label><input type="radio" name="opcion2" value="no_contesta">Otra</label>
+                </div>
+
+                <div>
+                    <button id="actualizar2">Actualizar</button>
+                </div>
+            </div>
+
+            <hr>
+            <div class="center" id="ranking-mes">
+            </div>
+
         </fieldset>
     </main>
 
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-    <script src="app.js"></script>
+    <script src="app2.js"></script>
 </body>
 
 </html>
