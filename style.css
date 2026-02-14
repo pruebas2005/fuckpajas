@@ -147,3 +147,9 @@ button#sumar:active {
     transform: scale(0.95);
     background-color: #0b00a8;
 }
+
+@media (max-width: 600px) {
+    .colum {
+        font-size: 10px;
+    }
+}
