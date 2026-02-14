@@ -159,7 +159,8 @@ button#sumar:active {
     background-color: #0b00a8;
 }
 
-button#actualizar {
+button#actualizar,
+button#actualizar2 {
     width: 100%;
     padding: 10px;
     background-color: rgb(17, 0, 255);
@@ -172,12 +173,14 @@ button#actualizar {
     transition: transform 0.1s, background-color 0.3s;
 }
 
-button#actualizar:hover {
+button#actualizar:hover,
+button#actualizar2:hover {
     transform: scale(1.05);
 
 }
 
-button#actualizar:active {
+button#actualizar:active,
+button#actualizar2:active {
     transform: scale(0.95);
     background-color: #0b00a8;
 }
@@ -261,5 +264,60 @@ fieldset {
     button#sumar {
         padding: 12px;
         font-size: 18px;
+    }
+}
+
+/* --- MEJORA ESPECÍFICA PARA EL RANKING EN MÓVIL --- */
+@media (max-width: 600px) {
+
+    /* Forzamos a que las columnas del ranking se vuelvan filas */
+    fieldset .colum {
+        flex-direction: column;
+        align-items: center;
+        gap: 15px;
+        /* Espacio entre el texto, los radios y el botón */
+    }
+
+    /* Los grupos de radio del ranking que se vean en columna para no salirse */
+    .center {
+        flex-direction: column;
+        align-items: flex-start;
+        /* Alineados a la izquierda para que se vea limpio */
+        width: 100%;
+        gap: 8px;
+    }
+
+    /* Hacemos que los radios del ranking parezcan botones anchos */
+    fieldset .center label {
+        width: 100%;
+        background-color: #f8f9fa;
+        padding: 8px 12px;
+        border-radius: 6px;
+        border: 1px solid #eee;
+    }
+
+    /* Ajuste para el input de mes */
+    #mes {
+        width: 100%;
+        margin-top: 10px;
+    }
+
+    /* Botones de actualizar más grandes para el dedo */
+    #actualizar,
+    #actualizar2 {
+        width: 100%;
+        padding: 10px;
+        font-size: 16px;
+        background-color: #f0f0f0;
+        border: 1px solid #ccc;
+        border-radius: 8px;
+        cursor: pointer;
+    }
+
+    /* El contenedor donde salen los nombres */
+    #ranking-total,
+    #ranking-mes {
+        padding: 10px 0;
+        font-size: 15px;
     }
 }
