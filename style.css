@@ -1,6 +1,11 @@
 /* Importamos la fuente Poppins directamente desde Google Fonts */
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap');
 
+
+* {
+    box-sizing: border-box;
+}
+
 body {
     background-color: #f0f2f5;
     /* Un gris azulado muy clarito de fondo */
