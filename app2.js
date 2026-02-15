@@ -1,9 +1,8 @@
-// 1. Configuración de conexión (Igual que en la otra página)
 const SUPABASE_URL = 'https://vkjcfhxxmtmlgynmtpby.supabase.co';
 const SUPABASE_KEY = 'sb_publishable_GfGmOiq3CazPywMtfh4xNA_R335BXeT';
 const conexionBD = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
-// --- FUNCIÓN PARA EL RANKING TOTAL ---
+// --- RANKING TOTAL ---
 async function cargarRankingTotal() {
     const contenedor = document.getElementById('ranking-total');
     const filtroOpcion = document.querySelector('input[name="opcion1"]:checked')?.value;
@@ -11,71 +10,77 @@ async function cargarRankingTotal() {
     contenedor.innerHTML = "Cargando...";
 
     let consulta = conexionBD.from('registro_pajas').select('id_user');
-
-    // Filtramos por categoría si no es "Todas"
     if (filtroOpcion) {
         consulta = consulta.eq('opcion', filtroOpcion);
     }
 
     const { data, error } = await consulta;
-
-    if (error) return contenedor.innerHTML = "Error al cargar";
+    if (error) return contenedor.innerHTML = "Error: " + error.message;
 
     mostrarResultados(data, contenedor);
 }
 
-// --- FUNCIÓN PARA EL RANKING POR MES ---
+// --- RANKING POR MES ---
 async function cargarRankingMes() {
     const contenedor = document.getElementById('ranking-mes');
     const filtroOpcion = document.querySelector('input[name="opcion2"]:checked')?.value;
-    const mesElegido = document.getElementById('mes').value; // Ejemplo: "2026-02"
+    const mesElegido = document.getElementById('mes').value;
 
     if (!mesElegido) return alert("Selecciona un mes primero, caballero");
 
     contenedor.innerHTML = "Cargando...";
 
-    // 1. Desmontamos el año y mes (ej: "2026" y "02")
+    // Rango de fechas para el mes
     const [anio, mes] = mesElegido.split('-');
-
-    // 2. Definimos el inicio: día 01 a las 00:00:00
     const inicio = `${anio}-${mes}-01T00:00:00Z`;
-
-    // 3. Calculamos el inicio del mes siguiente de forma automática
     let proximoMes = parseInt(mes) + 1;
     let proximoAnio = parseInt(anio);
+    if (proximoMes > 12) { proximoMes = 1; proximoAnio++; }
+    const fin = `${proximoAnio}-${String(proximoMes).padStart(2, '0')}-01T00:00:00Z`;
 
-    if (proximoMes > 12) {
-        proximoMes = 1;
-        proximoAnio++;
-    }
-
-    // Formateamos el mes siguiente para que siempre tenga dos dígitos (ej: "03")
-    const mesSiguienteFormateado = String(proximoMes).padStart(2, '0');
-    const fin = `${proximoAnio}-${mesSiguienteFormateado}-01T00:00:00Z`;
-
-    // 4. Hacemos la consulta usando .lt (Less Than / Menor que)
     let consulta = conexionBD.from('registro_pajas')
         .select('id_user')
-        .gte('momento', inicio) // Mayor o igual al 1 de febrero
-        .lt('momento', fin);    // MENOR estricto al 1 de marzo
+        .gte('momento', inicio)
+        .lt('momento', fin);
 
     if (filtroOpcion) {
         consulta = consulta.eq('opcion', filtroOpcion);
     }
 
     const { data, error } = await consulta;
-
-    if (error) {
-        console.error("Error de Supabase:", error);
-        return contenedor.innerHTML = "Error al cargar: " + error.message;
-    }
+    if (error) return contenedor.innerHTML = "Error: " + error.message;
 
     mostrarResultados(data, contenedor);
 }
 
-// Asignar eventos a los botones
+// --- ESTA ES LA FUNCIÓN QUE TE FALTABA ---
+function mostrarResultados(data, contenedor) {
+    if (!data || data.length === 0) {
+        contenedor.innerHTML = "No hay datos para esta selección.";
+        return;
+    }
+
+    // Contamos cuántas lleva cada uno
+    const conteo = {};
+    data.forEach(reg => {
+        conteo[reg.id_user] = (conteo[reg.id_user] || 0) + 1;
+    });
+
+    // Ordenamos de mayor a menor
+    const ranking = Object.entries(conteo).sort((a, b) => b[1] - a[1]);
+
+    // Lo dibujamos en el HTML
+    contenedor.innerHTML = ranking.map(([nombre, total], i) => `
+        <div style="width:100%; display:flex; justify-content:space-between; padding:8px; border-bottom:1px solid #eee;">
+            <span><strong>#${i + 1}</strong> ${nombre}</span>
+            <span>${total} 💦</span>
+        </div>
+    `).join('');
+}
+
+// Eventos
 document.getElementById('actualizar').addEventListener('click', cargarRankingTotal);
 document.getElementById('actualizar2').addEventListener('click', cargarRankingMes);
 
-// Cargar el total automáticamente al entrar
+// Carga inicial
 cargarRankingTotal();

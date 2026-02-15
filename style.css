@@ -74,6 +74,28 @@ main {
     /* Para que no sea gigante en la pantalla del PC */
 }
 
+select {
+    padding: 12px;
+    border: 2px solid #ccc;
+    border-radius: 8px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 16px;
+    transition: border-color 0.3s;
+    background-color: white;
+    width: 10%;
+}
+
+input[type="month"] {
+    padding: 12px;
+    border: 2px solid #ccc;
+    border-radius: 8px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 16px;
+    transition: border-color 0.3s;
+    background-color: white;
+    width: 55%;
+}
+
 .grupo-input {
     display: flex;
     flex-direction: column;
@@ -319,5 +341,9 @@ fieldset {
     #ranking-mes {
         padding: 10px 0;
         font-size: 15px;
+    }
+
+    select {
+        width: 100%;
     }
 }
