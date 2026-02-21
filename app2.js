@@ -17,7 +17,7 @@ async function cargarRankingTotal() {
     const { data, error } = await consulta;
     if (error) return contenedor.innerHTML = "Error: " + error.message;
 
-    mostrarResultados(data, contenedor);
+    mostrarResultadosAnio(data, contenedor);
 }
 
 // --- RANKING POR MES ---
@@ -50,11 +50,11 @@ async function cargarRankingMes() {
     const { data, error } = await consulta;
     if (error) return contenedor.innerHTML = "Error: " + error.message;
 
-    mostrarResultados(data, contenedor);
+    mostrarResultadosMes(data, contenedor);
 }
 
 // --- ESTA ES LA FUNCIÓN QUE TE FALTABA ---
-function mostrarResultados(data, contenedor) {
+function mostrarResultadosAnio(data, contenedor) {
     if (!data || data.length === 0) {
         contenedor.innerHTML = "No hay datos para esta selección.";
         return;
@@ -73,7 +73,33 @@ function mostrarResultados(data, contenedor) {
     contenedor.innerHTML = ranking.map(([nombre, total], i) => `
         <div style="width:100%; display:flex; justify-content:space-between; padding:8px; border-bottom:1px solid #eee;">
             <span><strong>#${i + 1}</strong> ${nombre}</span>
-<span><strong>promedio: </strong>${(total / 30).toFixed(1)}</span>
+
+            <span>${total} 💦</span>
+
+        </div>
+    `).join('');
+}
+
+function mostrarResultadosMes(data, contenedor) {
+    if (!data || data.length === 0) {
+        contenedor.innerHTML = "No hay datos para esta selección.";
+        return;
+    }
+
+    // Contamos cuántas lleva cada uno
+    const conteo = {};
+    data.forEach(reg => {
+        conteo[reg.id_user] = (conteo[reg.id_user] || 0) + 1;
+    });
+
+    // Ordenamos de mayor a menor
+    const ranking = Object.entries(conteo).sort((a, b) => b[1] - a[1]);
+
+    // Lo dibujamos en el HTML
+    contenedor.innerHTML = ranking.map(([nombre, total], i) => `
+        <div style="width:100%; display:flex; justify-content:space-between; padding:8px; border-bottom:1px solid #eee;">
+            <span><strong>#${i + 1}</strong> ${nombre}</span>
+            <span><strong>promedio: </strong>${(total / 30).toFixed(1)}</span>
 
             <span>${total} 💦</span>
 
