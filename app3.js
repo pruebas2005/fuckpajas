@@ -12,11 +12,7 @@ async function cargarComentarios() {
     // .not('url', 'is', null) asegura que tampoco traiga las nulas
     const { data, error } = await conexionBD
         .from('registro_pajas')
-        .select('id_user, momento, url, opcion')
-        .neq('url', '')
-        .not('url', 'is', null)
-        .order('momento', { ascending: false })
-        .limit(20);
+        .select('id_user, momento, url').order('momento', { ascending: false });
 
     if (error) {
         contenedor.innerHTML = "Error: " + error.message;
