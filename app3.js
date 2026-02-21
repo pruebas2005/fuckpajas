@@ -47,8 +47,8 @@ function mostrarComentarios(data, contenedor) {
                 
                 <div style="margin: 10px 0; font-size: 0.95em; line-height: 1.4;">
                     ${esUrl
-                ? `🔗 <a href="${reg.url}" target="_blank" style="color: #1100ff; text-decoration: underline; word-break: break-all;">${reg.url}</a>`
-                : `💬 <span>${reg.url}</span>`
+                ? `<a href="${reg.url}" target="_blank" style="color: #1100ff; text-decoration: underline; word-break: break-all;">${reg.url}</a>`
+                : `<span>${reg.url}</span>`
             }
                 </div>
             </div>
