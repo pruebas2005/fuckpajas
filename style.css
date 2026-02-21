@@ -82,7 +82,7 @@ select {
     font-size: 16px;
     transition: border-color 0.3s;
     background-color: white;
-    width: 10%;
+    width: 20%;
 }
 
 input[type="month"] {

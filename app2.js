@@ -78,9 +78,13 @@ function mostrarResultados(data, contenedor) {
     `).join('');
 }
 
+
+
+
 // Eventos
 document.getElementById('actualizar').addEventListener('click', cargarRankingTotal);
 document.getElementById('actualizar2').addEventListener('click', cargarRankingMes);
+
 
 // Carga inicial
 cargarRankingTotal();
