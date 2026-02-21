@@ -2,6 +2,16 @@ const SUPABASE_URL = 'https://vkjcfhxxmtmlgynmtpby.supabase.co';
 const SUPABASE_KEY = 'sb_publishable_GfGmOiq3CazPywMtfh4xNA_R335BXeT';
 const conexionBD = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
+function diasEnElMesActual() {
+    const fecha = new Date();
+    // Año actual, Mes siguiente (mes + 1), día 0
+    return new Date(fecha.getFullYear(), fecha.getMonth() + 1, 0).getDate();
+}
+
+console.log("Este mes tiene " + diasEnElMesActual() + " días.");
+
+console.log("Estamos en: " + nombresMeses[mesNumero]);
+
 // --- RANKING TOTAL ---
 async function cargarRankingTotal() {
     const contenedor = document.getElementById('ranking-total');
@@ -99,7 +109,7 @@ function mostrarResultadosMes(data, contenedor) {
     contenedor.innerHTML = ranking.map(([nombre, total], i) => `
         <div style="width:100%; display:flex; justify-content:space-between; padding:8px; border-bottom:1px solid #eee;">
             <span><strong>#${i + 1}</strong> ${nombre}</span>
-            <span><strong>promedio: </strong>${(total / 30).toFixed(1)}</span>
+            <span><strong>promedio: </strong>${(total / diasEnElMesActual()).toFixed(1)}</span>
 
             <span>${total} 💦</span>
 
