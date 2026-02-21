@@ -74,6 +74,7 @@ function mostrarResultados(data, contenedor) {
         <div style="width:100%; display:flex; justify-content:space-between; padding:8px; border-bottom:1px solid #eee;">
             <span><strong>#${i + 1}</strong> ${nombre}</span>
             <span>${total} 💦</span>
+<span>${total/30}</span>
         </div>
     `).join('');
 }
