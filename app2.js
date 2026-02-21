@@ -73,7 +73,7 @@ function mostrarResultados(data, contenedor) {
     contenedor.innerHTML = ranking.map(([nombre, total], i) => `
         <div style="width:100%; display:flex; justify-content:space-between; padding:8px; border-bottom:1px solid #eee;">
             <span><strong>#${i + 1}</strong> ${nombre}</span>
-<span><strong>promedio: </strong>${(total / 30).toFixed(2)}</span>
+<span><strong>promedio: </strong>${(total / 30).toFixed(1)}</span>
 
             <span>${total} 💦</span>
 
