@@ -44,11 +44,7 @@ header div a {
     font-weight: 600;
 }
 
-header div a:hover {
-    background-color: rgb(11, 0, 170);
-    padding: 5px 5px;
-    border-radius: 8px;
-}
+
 
 .colum {
     display: flex;
