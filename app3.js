@@ -25,10 +25,9 @@ async function cargarComentarios() {
 
     mostrarComentarios(data, contenedor);
 }
-
 function mostrarComentarios(data, contenedor) {
     if (!data || data.length === 0) {
-        contenedor.innerHTML = "<p>Nadie ha dejado nada todavía. ¡Panda de cobardes!</p>";
+        contenedor.innerHTML = "<p>Nadie ha dejado pruebas... aún.</p>";
         return;
     }
 
@@ -40,17 +39,26 @@ function mostrarComentarios(data, contenedor) {
             minute: '2-digit'
         });
 
+        // Comprobamos si el contenido de 'url' empieza por http
+        const esUrl = reg.url && reg.url.trim().toLowerCase().startsWith('http');
+
         return `
-            <div style="width:100%; padding: 15px; border-bottom: 1px solid #ddd; margin-bottom: 10px; background: #ffffff; border-radius: 12px; box-shadow: 0 2px 5px rgba(0,0,0,0.05);">
-                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
-                    <strong style="color: #1100ff; font-size: 1.1em;">${reg.id_user}</strong>
-                    <small style="color: #888;">${fecha}</small>
+            <div style="width:100%; padding: 15px; border-bottom: 1px solid #eee; margin-bottom: 12px; background: white; border-radius: 12px; box-shadow: 0 4px 6px rgba(0,0,0,0.05);">
+                <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
+                    <strong style="color: #1100ff;">${reg.id_user}</strong>
+                    <small style="color: #999;">${fecha}</small>
                 </div>
-                <div style="text-align: center;">
-                   ${reg.url}
+                
+                <div style="margin: 10px 0; font-size: 0.95em; line-height: 1.4;">
+                    ${esUrl
+                ? `🔗 <a href="${reg.url}" target="_blank" style="color: #1100ff; text-decoration: underline; word-break: break-all;">${reg.url}</a>`
+                : `💬 <span>${reg.url}</span>`
+            }
                 </div>
             </div>
         `;
     }).join('');
+
 }
+
 document.addEventListener('DOMContentLoaded', cargarComentarios);
