@@ -8,9 +8,6 @@ function diasEnElMesActual() {
     return new Date(fecha.getFullYear(), fecha.getMonth() + 1, 0).getDate();
 }
 
-console.log("Este mes tiene " + diasEnElMesActual() + " días.");
-
-console.log("Estamos en: " + nombresMeses[mesNumero]);
 
 // --- RANKING TOTAL ---
 async function cargarRankingTotal() {
