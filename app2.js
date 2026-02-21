@@ -1,4 +1,3 @@
-// 1. LA 'c' MINÚSCULA. ESTO ERA TU ERROR FATAL.
 const SUPABASE_URL = 'https://vkjcfhxxmtmlgynmtpby.supabase.co';
 const SUPABASE_KEY = 'sb_publishable_GfGmOiq3CazPywMtfh4xNA_R335BXeT';
 const conexionBD = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
@@ -31,11 +30,28 @@ async function cargarRankingMes() {
 
     contenedor.innerHTML = "Cargando...";
 
-    // Rango de fechas para el mes
     const [anio, mes] = mesElegido.split('-');
     
-    // CALCULAMOS LOS DÍAS EXACTOS DE ESE MES PARA EL PROMEDIO
-    const diasDelMesElegido = new Date(parseInt(anio), parseInt(mes), 0).getDate();
+    // --- LÓGICA ESTRATÉGICA DE PROMEDIOS ---
+    const fechaHoy = new Date();
+    const anioHoy = fechaHoy.getFullYear();
+    const mesHoy = fechaHoy.getMonth() + 1; // Enero es 0 en JS, sumamos 1
+    const diaHoy = fechaHoy.getDate();
+
+    let diasParaPromedio;
+
+    // Escenario 1: Mes pasado
+    if (parseInt(anio) < anioHoy || (parseInt(anio) === anioHoy && parseInt(mes) < mesHoy)) {
+        diasParaPromedio = new Date(parseInt(anio), parseInt(mes), 0).getDate();
+    } 
+    // Escenario 2: Mes actual
+    else if (parseInt(anio) === anioHoy && parseInt(mes) === mesHoy) {
+        diasParaPromedio = diaHoy;
+    } 
+    // Escenario 3: Mes futuro
+    else {
+        diasParaPromedio = new Date(parseInt(anio), parseInt(mes), 0).getDate();
+    }
 
     const inicio = `${anio}-${mes}-01T00:00:00Z`;
     let proximoMes = parseInt(mes) + 1;
@@ -55,8 +71,7 @@ async function cargarRankingMes() {
     const { data, error } = await consulta;
     if (error) return contenedor.innerHTML = "Error: " + error.message;
 
-    // Pasamos los días del mes a la función para que el promedio sea real
-    mostrarResultadosMes(data, contenedor, diasDelMesElegido);
+    mostrarResultadosMes(data, contenedor, diasParaPromedio);
 }
 
 // --- MOSTRAR RESULTADOS TOTALES ---
@@ -81,8 +96,8 @@ function mostrarResultadosAnio(data, contenedor) {
     `).join('');
 }
 
-// --- MOSTRAR RESULTADOS MENSUALES (CON PROMEDIO REAL) ---
-function mostrarResultadosMes(data, contenedor, diasDelMes) {
+// --- MOSTRAR RESULTADOS MENSUALES ---
+function mostrarResultadosMes(data, contenedor, diasParaPromedio) {
     if (!data || data.length === 0) {
         contenedor.innerHTML = "No hay datos para esta selección.";
         return;
@@ -98,7 +113,7 @@ function mostrarResultadosMes(data, contenedor, diasDelMes) {
     contenedor.innerHTML = ranking.map(([nombre, total], i) => `
         <div style="width:100%; display:flex; justify-content:space-between; padding:8px; border-bottom:1px solid #eee;">
             <span><strong>#${i + 1}</strong> ${nombre}</span>
-            <span><strong>promedio: </strong>${(total / diasDelMes).toFixed(1)}/día</span>
+            <span><strong>promedio: </strong>${(total / diasParaPromedio).toFixed(1)}/día</span>
             <span>${total} 💦</span>
         </div>
     `).join('');
