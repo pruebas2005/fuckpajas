@@ -21,10 +21,6 @@ document.getElementById('formulario-colegas').addEventListener('submit', async f
 
     let cantidad = parseInt(document.getElementById('cantidad').value);
 
-    if (cantidad = 0) {
-        cantidad = 1;
-    }
-
     for (let i = 0; i < cantidad; i++) {
         // Mandamos los datos usando nuestra 'conexionBD'
         const { data, error } = await conexionBD
