@@ -34,21 +34,31 @@
     <main>
         <form id="formulario-colegas">
             <div class="grupo-input">
-                <label for="name">Nombre:</label>
-                <select id="name" name="name" required>
-                    <option value="" disabled selected>Selecciona tu nombre</option>
-                    <option value="jaime">jaime</option>
-                    <option value="Raul">Raul</option>
-                    <option value="Alejandro">Alejandro</option>
-                    <option value="Antonio">Antonio</option>
-                    <option value="Juan">Juan</option>
-                    <option value="Pedro">Pedro</option>
-                    <option value="Josema">Josema</option>
-                </select>
-                <label for="url">Comentarios:</label>
-                <input type="url" id="url" name="url"
+                <div class="colum">
+                    <div class="nombre">
+                        <label for="name">Nombre:</label>
+                        <select id="name" name="name" required>
+                            <option value="" disabled selected>Selecciona tu nombre</option>
+                            <option value="jaime">jaime</option>
+                            <option value="Raul">Raul</option>
+                            <option value="Alejandro">Alejandro</option>
+                            <option value="Antonio">Antonio</option>
+                            <option value="Juan">Juan</option>
+                            <option value="Pedro">Pedro</option>
+                            <option value="Josema">Josema</option>
+                        </select>
+                    </div>
+                    <div class="cantidad">
+                        <label for="cantidad">Cantidad:</label>
+                        <input type="number" id="cantidad" name="cantidad" min="1" required>
+                    </div>
+                </div>
+
+                <label for="coment">Comentarios:</label>
+                <input type="text" id="url" name="url"
                     placeholder="Añade tu video caballero o cualquier comentraio al respecto">
             </div>
+
 
             <div class="grupo-radio">
                 <label><input name="opcion" value="deslechada" type="radio" required> Deslechada</label>

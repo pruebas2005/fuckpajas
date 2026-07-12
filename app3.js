@@ -45,13 +45,13 @@ function mostrarComentarios(data, contenedor) {
         return `
             <div style="width:100%; padding: 15px; border-bottom: 1px solid #eee; margin-bottom: 12px; background: white; border-radius: 12px; box-shadow: 0 4px 6px rgba(0,0,0,0.05);">
                 <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
-                    <strong style="color: #1100ff;">${reg.id_user}</strong>
+                    <strong style="color: #ff321e;">${reg.id_user}</strong>
                     <small style="color: #999;">${fecha}</small>
                 </div>
                 
                 <div style="margin: 10px 0; font-size: 0.95em; line-height: 1.4;">
                     ${esUrl
-                ? `🔗 <a href="${reg.url}" target="_blank" style="color: #1100ff; text-decoration: underline; word-break: break-all;">${reg.url}</a>`
+                ? `🔗 <a href="${reg.url}" target="_blank" style="color: #ff321e; text-decoration: underline; word-break: break-all;">${reg.url}</a>`
                 : `💬 <span>${reg.url}</span>`
             }
                 </div>

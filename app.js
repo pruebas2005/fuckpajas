@@ -16,28 +16,31 @@ document.getElementById('formulario-colegas').addEventListener('submit', async f
 
     // Recogemos los datos que ha escrito el colega en la web
     const nombreUsuario = document.getElementById('name').value;
-    const urlVideo = document.getElementById('url').value;
+    const coment = document.getElementById('coment').value;
     const opcionElegida = document.querySelector('input[name="opcion"]:checked').value;
 
-    // Mandamos los datos usando nuestra 'conexionBD'
-    const { data, error } = await conexionBD
-        .from('registro_pajas')
-        .insert([
-            {
-                id_user: nombreUsuario,
-                url: urlVideo,
-                opcion: opcionElegida
-            }
-        ]);
+    let cantidad = parseInt(document.getElementById('cantidad').value);
 
-    // Comprobamos si ha ido bien o mal
-    if (error) {
-        console.error("Error detallado:", error);
-        alert("Pfff, ha habido un error al guardar: " + error.message);
-    } else {
-        document.getElementById('formulario-colegas').reset(); // Limpiamos el formulario
+    for (let i = 0; i < cantidad; i++) {
+        // Mandamos los datos usando nuestra 'conexionBD'
+        const { data, error } = await conexionBD
+            .from('registro_pajas')
+            .insert([
+                {
+                    id_user: nombreUsuario,
+                    url: coment,
+                    opcion: opcionElegida
+                }
+            ]);
+        // Comprobamos si ha ido bien o mal
+        if (error) {
+            console.error("Error detallado:", error);
+            alert("Pfff, ha habido un error al guardar: " + error.message);
+        } else {
+            document.getElementById('formulario-colegas').reset(); // Limpiamos el formulario
+        }
+
+        // Volvemos a poner el botón normal
+        boton.innerText = "+1 Al Marcador";
     }
-
-    // Volvemos a poner el botón normal
-    boton.innerText = "+1 Al Marcador";
 });

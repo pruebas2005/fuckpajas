@@ -7,7 +7,7 @@
 }
 
 body {
-    background-color: #f0f2f5;
+    background-color: #060304;
     /* Un gris azulado muy clarito de fondo */
     font-family: 'Poppins', sans-serif;
     margin: 0;
@@ -22,7 +22,7 @@ body {
 
 
 header {
-    background-color: rgb(17, 0, 255);
+    background-color: #fc651f;
     color: white;
     /* Letra blanca para que contraste bien */
     width: 100%;
@@ -51,6 +51,16 @@ header div a {
     justify-content: space-between;
     align-items: center;
     padding: 0 20px;
+    width: 100%;
+    gap: 20px;
+}
+
+.colum .nombre {
+    flex: 4;
+}
+
+.colum .cantidad {
+    flex: 1;
 }
 
 .center {
@@ -60,8 +70,15 @@ header div a {
     gap: 10px;
 }
 
+/* Forzamos a que rellenentodo el espacio de sus contenedores flex */
+.colum .nombre select,
+.colum .cantidad input {
+    width: 100%;
+    box-sizing: border-box;
+}
+
 main {
-    background-color: white;
+    background-color: antiquewhite;
     margin-top: 40px;
     padding: 30px;
     border-radius: 15px;
@@ -78,7 +95,8 @@ select {
     font-size: 16px;
     transition: border-color 0.3s;
     background-color: white;
-    width: 20%;
+    width: 100%;
+    /* ANTES ESTABA EN 20%, ¡ESTE ERA EL CULPABLE! */
 }
 
 input[type="month"] {
@@ -116,7 +134,7 @@ input[type="month"] {
 
 /* Efecto al hacer clic en escribir el nombre */
 .grupo-input input:focus {
-    border-color: rgb(17, 0, 255);
+    border-color: #fc651f;
     outline: none;
 }
 
@@ -133,7 +151,7 @@ input[type="month"] {
 
 /* Estilo de "tarjeta" para las opciones de radio */
 .grupo-radio label {
-    background-color: rgb(238, 244, 247);
+    background-color: rgb(247, 242, 238);
     padding: 12px 15px;
     border-radius: 8px;
     cursor: pointer;
@@ -145,24 +163,25 @@ input[type="month"] {
 }
 
 .grupo-radio label:hover {
-    background-color: #d0e3ff;
-    transform: scale(1.05);
+    background-color: #ffdbd0;
+    transform: scale(1.005);
 }
 
-.grupo-radio label:active {
-    transform: scale(0.95);
+.grupo-radio label::checkmark {
+    transform: scale(0.5);
+    background-color: #fc651f;
 }
 
 button#sumar {
     width: 100%;
     padding: 15px;
-    background-color: rgb(17, 0, 255);
+    background-color: #fc651f;
     color: white;
     font-size: 20px;
     font-weight: 800;
     border: none;
     border-radius: 10px;
-    box-shadow: 0px 5px 15px rgba(17, 0, 255, 0.4);
+    box-shadow: 0px 5px 15px rgba(255, 81, 0, 0.4);
     cursor: pointer;
     transition: transform 0.1s, background-color 0.3s;
 }
@@ -174,19 +193,19 @@ button#sumar:hover {
 
 button#sumar:active {
     transform: scale(0.95);
-    background-color: #0b00a8;
+    background-color: #ff321e;
 }
 
 button#actualizar,
 button#actualizar2 {
     width: 100%;
     padding: 10px;
-    background-color: rgb(17, 0, 255);
+    background-color: #fc651f;
     color: white;
     font-size: 16px;
     border: none;
     border-radius: 10px;
-    box-shadow: 0px 5px 15px rgba(17, 0, 255, 0.4);
+    box-shadow: 0px 5px 15pxrgba(255, 81, 0, 0.4);
     cursor: pointer;
     transition: transform 0.1s, background-color 0.3s;
 }
@@ -200,7 +219,7 @@ button#actualizar2:hover {
 button#actualizar:active,
 button#actualizar2:active {
     transform: scale(0.95);
-    background-color: #0b00a8;
+    background-color: #ff321e;
 }
 
 fieldset {
@@ -236,6 +255,7 @@ fieldset {
 
     .colum {
         padding: 0 10px;
+
     }
 
     /* Título un poco más pequeño */
