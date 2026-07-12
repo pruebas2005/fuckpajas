@@ -81,12 +81,13 @@ header div a {
 }
 
 main {
-    background-color: antiquewhite;
+    background-color: #2d2d2d;
     margin-top: 40px;
     padding: 30px;
     border-radius: 15px;
     box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.1);
     width: 90%;
+    color: #ffffff;
     /* Para que no sea gigante en la pantalla del PC */
 }
 
@@ -123,7 +124,7 @@ input[type="month"] {
 .grupo-input label {
     font-weight: 600;
     margin-bottom: 8px;
-    color: #333;
+    color: #ffff;
 }
 
 .grupo-input input {
@@ -155,6 +156,7 @@ input[type="month"] {
 /* Estilo de "tarjeta" para las opciones de radio */
 .grupo-radio label {
     background-color: rgb(247, 242, 238);
+    color: #000000;
     padding: 12px 15px;
     border-radius: 8px;
     cursor: pointer;

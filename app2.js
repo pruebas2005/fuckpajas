@@ -31,7 +31,7 @@ async function cargarRankingMes() {
     contenedor.innerHTML = "Cargando...";
 
     const [anio, mes] = mesElegido.split('-');
-    
+
     // --- LÓGICA ESTRATÉGICA DE PROMEDIOS ---
     const fechaHoy = new Date();
     const anioHoy = fechaHoy.getFullYear();
@@ -43,11 +43,11 @@ async function cargarRankingMes() {
     // Escenario 1: Mes pasado
     if (parseInt(anio) < anioHoy || (parseInt(anio) === anioHoy && parseInt(mes) < mesHoy)) {
         diasParaPromedio = new Date(parseInt(anio), parseInt(mes), 0).getDate();
-    } 
+    }
     // Escenario 2: Mes actual
     else if (parseInt(anio) === anioHoy && parseInt(mes) === mesHoy) {
         diasParaPromedio = diaHoy;
-    } 
+    }
     // Escenario 3: Mes futuro
     else {
         diasParaPromedio = new Date(parseInt(anio), parseInt(mes), 0).getDate();
