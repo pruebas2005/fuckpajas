@@ -12,7 +12,7 @@ async function cargarComentarios() {
     // .not('url', 'is', null) asegura que tampoco traiga las nulas
     const { data, error } = await conexionBD
         .from('registro_pajas')
-        .select('id_user, momento, url').order('momento', { ascending: false }).limit(33);
+        .select('id_user, momento, url').order('momento', { ascending: false }).neq('url', '');
 
     if (error) {
         contenedor.innerHTML = "Error: " + error.message;
@@ -41,13 +41,13 @@ function mostrarComentarios(data, contenedor) {
         return `
             <div style="width:100%; padding: 15px; border-bottom: 1px solid #eee; margin-bottom: 12px; background: white; border-radius: 12px; box-shadow: 0 4px 6px rgba(0,0,0,0.05);">
                 <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
-                    <strong style="color: #1100ff;">👤${reg.id_user}</strong>
+                    <strong style="color: #fc651f;">👤${reg.id_user}</strong>
                     <small style="color: #999;">${fecha}</small>
                 </div>
                 
                 <div style="margin: 10px 0; font-size: 0.95em; line-height: 1.4;">
                     ${esUrl
-                ? `<a href="${reg.url}" target="_blank" style="color: black; word-break: break-all;">${reg.url}</a>`
+                ? `<a href="${reg.url}" target="_blank" style="color: #fc651f; word-break: break-all;">${reg.url}</a>`
                 : `<span>${reg.url}</span>`
             }
                 </div>
