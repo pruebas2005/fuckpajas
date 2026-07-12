@@ -89,7 +89,7 @@ function mostrarResultadosAnio(data, contenedor) {
     const ranking = Object.entries(conteo).sort((a, b) => b[1] - a[1]);
 
     contenedor.innerHTML = ranking.map(([nombre, total], i) => `
-        <div style="width:100%; display:flex; justify-content:space-between; padding:8px; border-bottom:1px solid #eee;">
+        <div style="width:100%; color: white;display:flex; justify-content:space-between; padding:8px; border-bottom:1px solid #eee;">
             <span><strong>#${i + 1}</strong> ${nombre}</span>
             <span>${total} 💦</span>
         </div>
@@ -111,7 +111,7 @@ function mostrarResultadosMes(data, contenedor, diasParaPromedio) {
     const ranking = Object.entries(conteo).sort((a, b) => b[1] - a[1]);
 
     contenedor.innerHTML = ranking.map(([nombre, total], i) => `
-        <div style="width:100%; display:flex; justify-content:space-between; padding:8px; border-bottom:1px solid #eee;">
+        <div style="width:100%;color: white; display:flex; justify-content:space-between; padding:8px; border-bottom:1px solid #eee;">
             <span><strong>#${i + 1}</strong> ${nombre}</span>
             <span><strong>promedio: </strong>${(total / diasParaPromedio).toFixed(1)}/día</span>
             <span>${total} 💦</span>

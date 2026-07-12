@@ -71,6 +71,8 @@ header div a {
     justify-content: center;
     align-items: center;
     gap: 10px;
+    color: black;
+    width: 100%;
 }
 
 /* Forzamos a que rellenentodo el espacio de sus contenedores flex */
@@ -148,6 +150,8 @@ input[type="month"] {
     gap: 12px;
     margin-bottom: 30px;
     text-align: left;
+    width: 100%;
+
 
 }
 
