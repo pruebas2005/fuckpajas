@@ -2,16 +2,6 @@ const SUPABASE_URL = 'https://vkjcfhxxmtmlgynmtpby.supabase.co';
 const SUPABASE_KEY = 'sb_publishable_GfGmOiq3CazPywMtfh4xNA_R335BXeT';
 const conexionBD = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
-function diasEnElMesActual() {
-    const fecha = new Date();
-    // Año actual, Mes siguiente (mes + 1), día 0
-    return new Date(fecha.getFullYear(), fecha.getMonth() + 1, 0).getDate();
-}
-
-console.log("Este mes tiene " + diasEnElMesActual() + " días.");
-
-console.log("Estamos en: " + nombresMeses[mesNumero]);
-
 // --- RANKING TOTAL ---
 async function cargarRankingTotal() {
     const contenedor = document.getElementById('ranking-total');
@@ -40,8 +30,29 @@ async function cargarRankingMes() {
 
     contenedor.innerHTML = "Cargando...";
 
-    // Rango de fechas para el mes
     const [anio, mes] = mesElegido.split('-');
+    
+    // --- LÓGICA ESTRATÉGICA DE PROMEDIOS ---
+    const fechaHoy = new Date();
+    const anioHoy = fechaHoy.getFullYear();
+    const mesHoy = fechaHoy.getMonth() + 1; // Enero es 0 en JS, sumamos 1
+    const diaHoy = fechaHoy.getDate();
+
+    let diasParaPromedio;
+
+    // Escenario 1: Mes pasado
+    if (parseInt(anio) < anioHoy || (parseInt(anio) === anioHoy && parseInt(mes) < mesHoy)) {
+        diasParaPromedio = new Date(parseInt(anio), parseInt(mes), 0).getDate();
+    } 
+    // Escenario 2: Mes actual
+    else if (parseInt(anio) === anioHoy && parseInt(mes) === mesHoy) {
+        diasParaPromedio = diaHoy;
+    } 
+    // Escenario 3: Mes futuro
+    else {
+        diasParaPromedio = new Date(parseInt(anio), parseInt(mes), 0).getDate();
+    }
+
     const inicio = `${anio}-${mes}-01T00:00:00Z`;
     let proximoMes = parseInt(mes) + 1;
     let proximoAnio = parseInt(anio);
@@ -60,70 +71,57 @@ async function cargarRankingMes() {
     const { data, error } = await consulta;
     if (error) return contenedor.innerHTML = "Error: " + error.message;
 
-    mostrarResultadosMes(data, contenedor);
+    mostrarResultadosMes(data, contenedor, diasParaPromedio);
 }
 
-// --- ESTA ES LA FUNCIÓN QUE TE FALTABA ---
+// --- MOSTRAR RESULTADOS TOTALES ---
 function mostrarResultadosAnio(data, contenedor) {
     if (!data || data.length === 0) {
         contenedor.innerHTML = "No hay datos para esta selección.";
         return;
     }
 
-    // Contamos cuántas lleva cada uno
     const conteo = {};
     data.forEach(reg => {
         conteo[reg.id_user] = (conteo[reg.id_user] || 0) + 1;
     });
 
-    // Ordenamos de mayor a menor
     const ranking = Object.entries(conteo).sort((a, b) => b[1] - a[1]);
 
-    // Lo dibujamos en el HTML
     contenedor.innerHTML = ranking.map(([nombre, total], i) => `
         <div style="width:100%; display:flex; justify-content:space-between; padding:8px; border-bottom:1px solid #eee;">
             <span><strong>#${i + 1}</strong> ${nombre}</span>
-
             <span>${total} 💦</span>
-
         </div>
     `).join('');
 }
 
-function mostrarResultadosMes(data, contenedor) {
+// --- MOSTRAR RESULTADOS MENSUALES ---
+function mostrarResultadosMes(data, contenedor, diasParaPromedio) {
     if (!data || data.length === 0) {
         contenedor.innerHTML = "No hay datos para esta selección.";
         return;
     }
 
-    // Contamos cuántas lleva cada uno
     const conteo = {};
     data.forEach(reg => {
         conteo[reg.id_user] = (conteo[reg.id_user] || 0) + 1;
     });
 
-    // Ordenamos de mayor a menor
     const ranking = Object.entries(conteo).sort((a, b) => b[1] - a[1]);
 
-    // Lo dibujamos en el HTML
     contenedor.innerHTML = ranking.map(([nombre, total], i) => `
         <div style="width:100%; display:flex; justify-content:space-between; padding:8px; border-bottom:1px solid #eee;">
             <span><strong>#${i + 1}</strong> ${nombre}</span>
-            <span><strong>promedio: </strong>${(total / diasEnElMesActual()).toFixed(1)}</span>
-
+            <span><strong>promedio: </strong>${(total / diasParaPromedio).toFixed(1)}/día</span>
             <span>${total} 💦</span>
-
         </div>
     `).join('');
 }
 
-
-
-
 // Eventos
 document.getElementById('actualizar').addEventListener('click', cargarRankingTotal);
 document.getElementById('actualizar2').addEventListener('click', cargarRankingMes);
-
 
 // Carga inicial
 cargarRankingTotal();
