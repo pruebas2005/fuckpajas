@@ -23,21 +23,40 @@ document.getElementById('formulario-colegas').addEventListener('submit', async f
 
     for (let i = 0; i < cantidad; i++) {
         // Mandamos los datos usando nuestra 'conexionBD'
-        const { data, error } = await conexionBD
-            .from('registro_pajas')
-            .insert([
-                {
-                    id_user: nombreUsuario,
-                    url: coment,
-                    opcion: opcionElegida
-                }
-            ]);
-        // Comprobamos si ha ido bien o mal
-        if (error) {
-            console.error("Error detallado:", error);
-            alert("Pfff, ha habido un error al guardar: " + error.message);
+        console.log("Enviando registro " + i + " de " + cantidad);
+        if (i == 0) {
+            const { data, error } = await conexionBD
+                .from('registro_pajas')
+                .insert([
+                    {
+                        id_user: nombreUsuario,
+                        url: coment,
+                        opcion: opcionElegida
+                    }
+                ]);
+            // Comprobamos si ha ido bien o mal
+            if (error) {
+                console.error("Error detallado:", error);
+                alert("Pfff, ha habido un error al guardar: " + error.message);
+            } else {
+                document.getElementById('formulario-colegas').reset(); // Limpiamos el formulario
+            }
         } else {
-            document.getElementById('formulario-colegas').reset(); // Limpiamos el formulario
+            const { data, error } = await conexionBD
+                .from('registro_pajas')
+                .insert([
+                    {
+                        id_user: nombreUsuario,
+                        opcion: opcionElegida
+                    }
+                ]);
+            // Comprobamos si ha ido bien o mal
+            if (error) {
+                console.error("Error detallado:", error);
+                alert("Pfff, ha habido un error al guardar: " + error.message);
+            } else {
+                document.getElementById('formulario-colegas').reset(); // Limpiamos el formulario
+            }
         }
 
         // Volvemos a poner el botón normal
