@@ -44,6 +44,9 @@ header div a {
     font-weight: 600;
 }
 
+.contenedor-menu {
+    display: flex;
+}
 
 
 .colum {
